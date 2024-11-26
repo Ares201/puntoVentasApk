@@ -1,0 +1,11 @@
+/* Estilo para el modal pequeño */
+.small-modal {
+  --width: 80%;
+  --max-width: 400px;
+  --height: auto;
+  --max-height: 70%;
+}
+ion-datetime {
+  --width: 100%;
+  --height: 40px; /* Ajusta el tamaño */
+}

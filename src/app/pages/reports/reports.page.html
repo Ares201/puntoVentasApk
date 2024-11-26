@@ -1,0 +1,48 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Reportes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-row class="ion-justify-content-end">
+        <ion-col size="auto">
+          <ion-button>
+            <ion-icon slot="icon-only" name="share-social"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col><strong>Cliente</strong></ion-col>
+          <ion-col><strong>Movimiento</strong></ion-col>
+          <ion-col><strong>Transaccion</strong></ion-col>
+          <ion-col><strong>Monto</strong></ion-col>
+        </ion-row>
+        <ion-row *ngFor="let data of reportData">
+          <ion-col>{{ data.client }}</ion-col>
+          <ion-col>{{ data.transaction }}</ion-col>
+          <ion-col>{{ data.transaction }}</ion-col>
+          <ion-col>S/{{ data.amount }}</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Mensaje si no hay datos -->
+  <ion-card *ngIf="reportData.length === 0">
+    <ion-card-header>
+      <ion-card-title>Sin Resultados</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>No se encontraron datos para las fechas seleccionadas.</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

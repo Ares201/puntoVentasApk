@@ -1,0 +1,10 @@
+.button-container {
+  display: flex;
+  justify-content: flex-end; /* Alinea los botones a la derecha */
+  align-items: center; /* Centra los botones verticalmente */
+}
+
+.buttons {
+  display: flex;
+  gap: 8px; /* Espaciado entre botones */
+}

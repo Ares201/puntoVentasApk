@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Realizar Venta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="ion-no-margin">
+    <ion-col size="4" *ngFor="let product of products" class="ion-no-padding ion-no-margin">
+      <ion-card button (click)="addToCart(product)" class="product-card ion-no-padding">
+        <ion-row class="ion-no-padding ion-no-margin">
+          <ion-col size="12" class="ion-no-padding ion-no-margin">
+            <ion-img style="height: 60px;" [src]="product.image" alt="{{ product.name }}"></ion-img>
+          </ion-col>
+          <ion-col size="12" class="ion-no-padding ion-no-margin">
+            <p>{{ product.name }}</p>
+            <ion-chip [color]="product.stock > 0 ? 'primary' : 'danger'" mode="ios">
+              <ion-label>
+                {{ product.stock > 0 ? 'Stock ' + product.stock : 'Agotado' }}
+              </ion-label>
+            </ion-chip>
+            <p>Precio: S/{{ product.price }}</p>
+          </ion-col>
+        </ion-row>
+        <!-- Badge individual para cada producto -->
+        <div class="product-badge" *ngIf="product.clickCount > 0">
+          <ion-icon name="cart-outline"></ion-icon>
+          <span>{{ product.clickCount }}</span>
+        </div>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>
+
+
+

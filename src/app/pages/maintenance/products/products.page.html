@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Gestion de Productos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openProductModal()">
+        <ion-icon slot="icon-only" name="add-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let product of products">
+      <ion-label>
+        <h2>{{ product.name }}</h2>
+        <p>Precio: S/{{ product.price }} - Stock: {{ product.stock }}</p>
+      </ion-label>
+      <ion-button fill="clear" color="primary" (click)="editProduct(product)">
+        <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" color="danger" (click)="deleteProduct(product)">
+        <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>Tienda Apolo- 2024</ion-title>
+  </ion-toolbar>
+</ion-footer>
