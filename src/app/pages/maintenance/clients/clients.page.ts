@@ -1,21 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ClientFormComponent } from 'src/app/components/client-form/client-form.component';
-
+import { ClientService } from 'src/app/services/client.service';// Importa tu servicio
 
 @Component({
   selector: 'app-clients',
   templateUrl: './clients.page.html',
   styleUrls: ['./clients.page.scss'],
 })
-export class ClientsPage {
-  clients = [
-    { id: 1, name: 'Juan Pérez', email: 'juan@example.com', phone: '987654321' },
-    { id: 2, name: 'María López', email: 'maria@example.com', phone: '987123456' },
-    { id: 3, name: 'María López', email: 'maria@example.com', phone: '987123456', creditAmount: 600, referenceContact: '', showCreditModal: false },
-  ];
+export class ClientsPage implements OnInit {
+  clients: any[] = []; // La lista de clientes se cargará desde la API
 
-  constructor(private modalController: ModalController) {}
+  constructor(
+    private modalController: ModalController,
+    private clientService: ClientService // Inyecta el servicio
+  ) {}
+
+  ngOnInit() {
+    this.loadClients(); // Carga los clientes al inicializar la página
+  }
+
+  loadClients() {
+    this.clientService.getClients().subscribe({
+      next: (data) => {
+        this.clients = data; // Asigna los datos obtenidos a la lista de clientes
+        console.log('Clientes cargados:', data);
+      },
+      error: (err) => {
+        console.error('Error al cargar clientes:', err);
+      },
+    });
+  }
 
   async openAddClientModal() {
     const modal = await this.modalController.create({
@@ -53,9 +68,11 @@ export class ClientsPage {
   deleteClient(client: any) {
     this.clients = this.clients.filter((c) => c.id !== client.id);
   }
+
   toggleCreditModal(client: any) {
     client.showCreditModal = !client.showCreditModal;
   }
+
   closeCreditModal(client: any) {
     client.showCreditModal = false;
   }
@@ -67,5 +84,4 @@ export class ClientsPage {
     });
     client.showCreditModal = false;
   }
-
 }
