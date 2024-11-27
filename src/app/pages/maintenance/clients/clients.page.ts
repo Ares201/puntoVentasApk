@@ -17,14 +17,13 @@ export class ClientsPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loadClients(); // Carga los clientes al inicializar la página
+    this.listClient();
   }
 
-  loadClients() {
+  listClient() {
     this.clientService.getClients().subscribe({
       next: (data) => {
-        this.clients = data; // Asigna los datos obtenidos a la lista de clientes
-        console.log('Clientes cargados:', data);
+        this.clients = data;
       },
       error: (err) => {
         console.error('Error al cargar clientes:', err);
@@ -37,13 +36,12 @@ export class ClientsPage implements OnInit {
       component: ClientFormComponent,
       componentProps: { client: null, isEditing: false },
     });
-
     modal.onDidDismiss().then((result) => {
       if (result.data) {
-        this.clients.push(result.data);
+        // this.clients.push(result.data);
+        this.listClient()
       }
     });
-
     await modal.present();
   }
 
@@ -52,12 +50,13 @@ export class ClientsPage implements OnInit {
       component: ClientFormComponent,
       componentProps: { client: { ...client }, isEditing: true },
     });
-
+    console.log('Cliente', client)
     modal.onDidDismiss().then((result) => {
       if (result.data) {
         const index = this.clients.findIndex((c) => c.id === result.data.id);
         if (index !== -1) {
-          this.clients[index] = result.data;
+          // this.clients[index] = result.data;
+          this.listClient();
         }
       }
     });
@@ -67,21 +66,5 @@ export class ClientsPage implements OnInit {
 
   deleteClient(client: any) {
     this.clients = this.clients.filter((c) => c.id !== client.id);
-  }
-
-  toggleCreditModal(client: any) {
-    client.showCreditModal = !client.showCreditModal;
-  }
-
-  closeCreditModal(client: any) {
-    client.showCreditModal = false;
-  }
-
-  saveCreditDetails(client: any) {
-    console.log(`Crédito guardado para ${client.name}:`, {
-      amount: client.creditAmount,
-      reference: client.referenceContact,
-    });
-    client.showCreditModal = false;
   }
 }

@@ -9,7 +9,7 @@ const PORT = 5000;
 connectDB();
 app.use(cors()); // Esto permite solicitudes desde cualquier origen
 // Middleware
-app.use(express.json());
+app.use(express.json())
 // Rutas
 app.use('/api', clientRoutes);
 

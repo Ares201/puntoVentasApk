@@ -20,17 +20,20 @@
         <ion-chip color="success" *ngIf="client.creditAmount">
           <ion-label>Crédito: S/{{ client.creditAmount }}</ion-label>
         </ion-chip>
-        <ion-button (click)="editClient(client)">
-          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
-        </ion-button>
       </ion-item>
       <ion-card color="light" slot="content">
-        <ion-button color="danger" (click)="deleteClient(client)">
-          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
-          Eliminar Cliente
-        </ion-button>
+        <ion-row class="ion-justify-content-end ion-no-padding ion-no-margin">
+          <ion-col size="auto" class="ion-no-padding ion-no-margin">
+            <ion-button (click)="editClient(client)">
+              <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+            </ion-button>
+            <ion-button color="danger" (click)="deleteClient(client)">
+              <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
         <ion-card-header>
-          <ion-card-title>Configurar Crédito</ion-card-title>
+          <ion-card-title>Crédito</ion-card-title>
         </ion-card-header>
         <ion-card-content>
           <ion-item>
@@ -48,14 +51,6 @@
               placeholder="Nombre o teléfono"></ion-input>
           </ion-item>
         </ion-card-content>
-        <ion-footer class="modal-actions">
-          <ion-button expand="full" color="primary" (click)="saveCreditDetails(client)">
-            Guardar
-          </ion-button>
-          <ion-button expand="full" color="medium" (click)="toggleCreditModal(client)">
-            Cancelar
-          </ion-button>
-        </ion-footer>
       </ion-card>
     </ion-accordion>
   </ion-accordion-group>
